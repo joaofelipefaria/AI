@@ -1,0 +1,7 @@
+# Activate with: --spring.profiles.active=docker
+# Use this profile when the Spring Boot application itself is also
+# containerized and joins the same docker network as the "ollama" service.
+spring:
+  ai:
+    ollama:
+      base-url: http://ollama:11434

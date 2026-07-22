@@ -1,0 +1,10 @@
+Remote Work Policy - Example Company
+
+All employees on the Engineering team may work remotely up to 4 days per
+week. In-office presence is mandatory on Tuesdays for in-person alignment
+meetings.
+
+Requests for exceptions to this rule must be submitted directly to the
+employee's manager at least 3 business days in advance.
+
+This document supersedes any previous policy on this topic.

@@ -1,0 +1,61 @@
+version: "3.9"
+
+# ------------------------------------------------------------------
+# This compose file is responsible ONLY for provisioning the Ollama
+# LLM runtime that the Spring AI application connects to.
+# The Spring Boot application itself runs separately (locally or in
+# its own container) and points to this service via
+# `spring.ai.ollama.base-url` (see src/main/resources/application.yml).
+# ------------------------------------------------------------------
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+    healthcheck:
+      test: ["CMD-SHELL", "ollama list || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - ollama_network
+    # Uncomment to enable GPU acceleration (requires NVIDIA Container Toolkit)
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+  # One-shot helper that pulls the required model as soon as Ollama
+  # is healthy, so the application never fails on a "model not found"
+  # error on first run. Safe to run repeatedly (Ollama skips re-download
+  # if the model already exists).
+  ollama-model-pull:
+    image: ollama/ollama:latest
+    container_name: ollama-model-pull
+    depends_on:
+      ollama:
+        condition: service_healthy
+    entrypoint: ["/bin/sh", "-c", "ollama pull llama3.2"]
+    environment:
+      - OLLAMA_HOST=ollama:11434
+    networks:
+      - ollama_network
+
+networks:
+  ollama_network:
+    driver: bridge
+
+volumes:
+  ollama_data:
+    driver: local

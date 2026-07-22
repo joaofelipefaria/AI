@@ -1,0 +1,12 @@
+FAQ - Example Product
+
+Q: What is the product's warranty period?
+A: 18 months from the date of purchase, covering manufacturing defects.
+
+Q: How do I request a refund?
+A: Refunds can be requested within 7 calendar days of receiving the product,
+through the customer portal, under the "My Orders" section.
+
+Q: Does the product work offline?
+A: Yes, all core features work without an internet connection, except for
+cloud data synchronization.
