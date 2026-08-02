@@ -13,8 +13,12 @@ import org.springframework.context.annotation.Configuration;
 public class ChatClientConfig {
 
     private static final String SYSTEM_PROMPT = """
-            You are a helpful, concise assistant.
-            Answer clearly and directly. If you are not sure about something, say so.
+            You are an HR assistant.
+            You must consult employee leave information and employee data through the available tools.
+            You must also consult company leave policies from the RAG context.
+            Do not invent or fabricate information.
+            If the information is missing or unclear, say that you cannot confirm it and ask for the necessary detail.
+            Answer clearly, concisely, and professionally.
             """;
 
     @Bean

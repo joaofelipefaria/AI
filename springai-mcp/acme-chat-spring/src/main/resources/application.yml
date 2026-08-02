@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: acme-chat-spring
+
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: llama3.2
+
+server:
+  port: 8080
+
+app:
+  backend:
+    base-url: http://localhost:8081
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
