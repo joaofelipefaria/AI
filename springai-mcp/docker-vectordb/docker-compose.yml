@@ -1,0 +1,38 @@
+version: "3.9"
+
+# ------------------------------------------------------------------
+# This compose file provisions the Postgres + pgvector instance used
+# as the vector store for RAG (Retrieval Augmented Generation).
+# The Spring Boot application connects to it via spring.datasource.*
+# and spring.ai.vectorstore.pgvector.* (see application.yml).
+# ------------------------------------------------------------------
+
+services:
+  vectordb:
+    image: pgvector/pgvector:pg16
+    container_name: vectordb
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=vectordb
+      - POSTGRES_USER=vectordb
+      - POSTGRES_PASSWORD=vectordb
+    volumes:
+      - vectordb_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vectordb -d vectordb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - vectordb_network
+
+networks:
+  vectordb_network:
+    driver: bridge
+
+volumes:
+  vectordb_data:
+    driver: local

@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  acme-db:
+    image: postgres:17
+    container_name: acme_db_container
+    environment:
+      POSTGRES_USER: acme_admin_user
+      POSTGRES_PASSWORD: acme_admin_pwd
+      POSTGRES_DB: acme_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - acme-network
+
+volumes:
+  postgres_data:
+    name: acme_db_volume
+    
+networks:
+  acme-network: 
+    name: acme-network

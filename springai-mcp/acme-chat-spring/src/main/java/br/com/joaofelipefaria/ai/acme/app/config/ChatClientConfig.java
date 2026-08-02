@@ -1,4 +1,4 @@
-package br.com.joaofelipefaria.ai.springai.config;
+package br.com.joaofelipefaria.ai.acme.app.config;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.context.annotation.Bean;
@@ -13,17 +13,8 @@ import org.springframework.context.annotation.Configuration;
 public class ChatClientConfig {
 
     private static final String SYSTEM_PROMPT = """
-            You are an HR assistant.
-
-            You answer questions about employees.
-
-            When information exists in company documentation,
-            use the available documentation.
-
-            When information depends on employee-specific data,
-            use the available tools.
-
-            Never invent employee information.
+            You are a helpful, concise assistant.
+            Answer clearly and directly. If you are not sure about something, say so.
             """;
 
     @Bean
