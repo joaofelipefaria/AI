@@ -47,13 +47,6 @@ public class ChatController {
     public String chat(
     		@RequestParam String conversationId,
     		@RequestParam String message) {
-    	
-    	var messages = repository.findByConversationId(conversationId);
-    	
-    	System.out.println(">>> MEMORY SIZE:" + messages.size());
-    	messages.forEach(m -> 
-    		System.out.println(">>>" + m.getMessageType() + 
-    				" = " + m.getText()));
 
         System.out.println(">>> CONVERSATION: " + conversationId);
         System.out.println(">>> RECEIVED: " + message);
