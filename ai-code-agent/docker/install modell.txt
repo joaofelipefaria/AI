@@ -1,0 +1,7 @@
+docker exec code-agent curl http://ollama:11434/api/tags
+
+docker exec -it code-agent ollama pull qwen2.5-coder:3b
+
+docker exec -it code-agent ollama list
+
+docker exec -it code-agent ollama run qwen2.5-coder:3b

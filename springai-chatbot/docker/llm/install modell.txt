@@ -1,6 +1,0 @@
-docker exec -it chatbot-ollama ollama pull llama3.2
-
-docker exec -it chatbot-ollama ollama list
-
-docker exec -it chatbot-ollama ollama run llama3.2
-

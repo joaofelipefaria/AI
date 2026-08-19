@@ -2,9 +2,12 @@ services:
 
   ollama:
     image: ollama/ollama:latest
-    container_name: chatbot-ollama
+    container_name: code-agent
+    restart: unless-stopped
+
     ports:
       - "11434:11434"
+
     volumes:
       - ollama_data:/root/.ollama
 
